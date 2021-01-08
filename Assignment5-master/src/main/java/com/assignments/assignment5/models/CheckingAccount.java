@@ -1,52 +1,37 @@
 package com.assignments.assignment5.models;
 
-public class CheckingAccount {
-	long checkingAccountNumber;
-	double balance;
-	double interestRate = .0001;
-	String dateOpened;
-	static int nextCheckingAccountNumber = 1;
-	
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+
+@Entity(name = "CheckingAccount")
+@Table(name = "CheckingAccount")
+public class CheckingAccount extends BankAccount {
+
+	@DecimalMin(value = "0.0", inclusive = false, message = "interest rate must be greater than zero")
+	@DecimalMax(value = "1", inclusive = false, message = "interest rate must be less than one")
+	double interestRate = 0.0001;
+
 	public CheckingAccount() {
-		this.checkingAccountNumber = nextCheckingAccountNumber++;
-		this.balance = 0;
-		this.interestRate = .0001;
-		this.dateOpened = "12/6/2020";
-	}
-	
-	
-	public long getAccountNumber() {
-		return checkingAccountNumber;
+		super();
 	}
 
-	public void setAccountNumber(long checkingAccountNumber) {
-		this.checkingAccountNumber = checkingAccountNumber;
-	}
-
-	public double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-	
 	public double getInterestRate() {
 		return interestRate;
 	}
 
-	public void setInterest(double interestRate) {
+	public void setInterestRate(double interestRate) {
 		this.interestRate = interestRate;
 	}
-
-	public String getDate() {
-		return dateOpened;
-	}
-
-	public void setDate(String date) {
-		this.dateOpened = date;
-	}
-
-
 
 }

@@ -8,6 +8,7 @@ public class Assignment5Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Assignment5Application.class, args);
+		//CheckingAccount checkingAccount = 
 	}
 
 }

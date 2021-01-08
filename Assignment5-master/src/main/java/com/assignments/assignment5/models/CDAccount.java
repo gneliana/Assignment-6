@@ -1,59 +1,50 @@
 package com.assignments.assignment5.models;
 
-public class CDAccount {
-	long accountNumber;
-	double balance;
-	String dateOpened;
-	double interestRate = 0.025;
-	int term;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity(name = "CDAccount")
+@Table(name = "CDAccount")
+public class CDAccount extends BankAccount {
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 	
+	@ManyToOne
+	@JoinColumn(name = "offering_id") 
+	private CDOffering cDOffering;
+	 
 	public CDAccount() {
-		this.accountNumber = 0 ;
-		this.balance = 0;
-		this.dateOpened = "";
-		this.interestRate = 0;
-		this.term = 0;
-	}
-	
-	
-	public long getAccountNumber() {
-		return accountNumber;
+		super();
 	}
 
-	public void setAccountNumber(long accountNumber) {
-		this.accountNumber = accountNumber;
+	public Integer getId() {
+		return id;
 	}
 
-	public double getBalance() {
-		return balance;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setBalance(double balance) {
-		this.balance = balance;
+	@JsonBackReference(value="cdAccount")
+	public CDOffering getcDOffering() {
+		return cDOffering;
 	}
 
-	public String getDateOpened() {
-		return dateOpened;
+	public void setcDOffering(CDOffering cDOffering) {
+		this.cDOffering = cDOffering;
 	}
-
-	public void setDateOpened(String dateOpened) {
-		this.dateOpened = dateOpened;
-	}
-
-	public double getInterestRate() {
-		return interestRate;
-	}
-
-	public void setInterestRate(double interestRate) {
-		this.interestRate = interestRate;
-	}
-
-	public int getTerm() {
-		return term;
-	}
-
-	public void setTerm(int term) {
-		this.term = term;
-	}
-
 }

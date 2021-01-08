@@ -1,43 +1,24 @@
 package com.assignments.assignment5.models;
 
-public class SavingsAccount {
+import java.util.Date;
 
-	long savingsAccountNumber;
-	double balance;
-	String dateOpened;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+
+@Entity(name = "SavingsAccount")
+@Table(name = "SavingsAccount")
+public class SavingsAccount extends BankAccount {
+
+	@DecimalMin(value = "0.0", inclusive = false, message = "interest rate must be greater than zero")
+	@DecimalMax(value = "1", inclusive = false, message = "interest rate must be less than one")
 	double interestRate = 0.01;
-	int id;
-	static int nextSavingsAccountNumber = 1;
-	
+
 	public SavingsAccount() {
-		this.balance = 0;
-		this.dateOpened = "12/6/2020";
-		this.interestRate = 0.01;
-		this.savingsAccountNumber = nextSavingsAccountNumber++;
-	}
-
-	public long getAccountNumber() {
-		return savingsAccountNumber;
-	}
-
-	public void setAccountNumber(long accountNumber) {
-		this.savingsAccountNumber = accountNumber;
-	}
-
-	public double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-
-	public String getDateOpened() {
-		return dateOpened;
-	}
-
-	public void setDateOpened(String dateOpened) {
-		this.dateOpened = dateOpened;
+		super();
 	}
 
 	public double getInterestRate() {
